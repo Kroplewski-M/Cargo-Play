@@ -129,6 +129,7 @@ dependencies = [
  "color-eyre",
  "crossterm",
  "ratatui",
+ "thiserror 2.0.18",
 ]
 
 [[package]]

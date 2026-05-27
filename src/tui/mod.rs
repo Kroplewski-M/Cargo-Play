@@ -1,7 +1,6 @@
-use std::panic;
-
-use color_eyre::eyre::Result;
+use crate::error::Result;
 use ratatui::DefaultTerminal;
+use std::panic;
 
 pub fn set_panic_hook() {
     let original = panic::take_hook();
@@ -16,8 +15,7 @@ pub fn setup() -> Result<DefaultTerminal> {
     Ok(terminal)
 }
 
-pub fn teardown(terminal: DefaultTerminal) -> Result<()> {
-    drop(terminal);
+pub fn teardown() -> Result<()> {
     ratatui::restore();
     Ok(())
 }

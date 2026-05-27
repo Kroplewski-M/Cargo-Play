@@ -9,6 +9,7 @@ edition = "2024"
 color-eyre = "0.6.5"
 crossterm = "0.29.0"
 ratatui = "0.30.0"
+thiserror = "2.0.18"
 
 
 [profile.release]
