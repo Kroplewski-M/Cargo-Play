@@ -1,22 +1,23 @@
-use ratatui::{DefaultTerminal, Frame};
+use std::panic;
 
-pub struct CargoPlay;
+use color_eyre::eyre::Result;
+use ratatui::DefaultTerminal;
 
-impl CargoPlay {
-    pub fn run() -> color_eyre::Result<()> {
-        ratatui::run(Self::app)?;
-        Ok(())
-    }
+pub fn set_panic_hook() {
+    let original = panic::take_hook();
+    panic::set_hook(Box::new(move |info| {
+        ratatui::restore();
+        original(info);
+    }));
+}
 
-    fn app(terminal: &mut DefaultTerminal) -> std::io::Result<()> {
-        loop {
-            terminal.draw(Self::render)?;
-            if crossterm::event::read()?.is_key_press() {
-                break Ok(());
-            }
-        }
-    }
-    fn render(frame: &mut Frame) {
-        frame.render_widget("hello world", frame.area());
-    }
+pub fn setup() -> Result<DefaultTerminal> {
+    let terminal = ratatui::init();
+    Ok(terminal)
+}
+
+pub fn teardown(terminal: DefaultTerminal) -> Result<()> {
+    drop(terminal);
+    ratatui::restore();
+    Ok(())
 }
