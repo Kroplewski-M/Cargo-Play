@@ -2,6 +2,9 @@ use crate::error::Result;
 use ratatui::DefaultTerminal;
 use std::panic;
 
+pub mod state;
+pub mod widgets;
+
 pub fn set_panic_hook() {
     let original = panic::take_hook();
     panic::set_hook(Box::new(move |info| {

@@ -1,7 +1,7 @@
 use crossterm::event::{self, Event};
 use std::time::Duration;
 
-use crate::app::AppState;
+use crate::{app::AppState, tui::state::UiState};
 mod app;
 mod error;
 mod tui;
@@ -10,24 +10,21 @@ fn main() -> color_eyre::Result<()> {
     tui::set_panic_hook();
     let result = run();
     tui::teardown()?;
-    result
+    Ok(result?)
 }
 
-fn run() -> color_eyre::Result<()> {
+fn run() -> error::Result<()> {
     let mut terminal = tui::setup()?;
-    let mut state = AppState::new();
+    let mut app = AppState::new();
+    let mut ui = UiState::new();
 
-    while state.running {
-        terminal.draw(render)?;
+    while app.running {
+        terminal.draw(|f| tui::widgets::render(f, &app, &mut ui))?;
         if event::poll(Duration::from_millis(16))?
             && let Event::Key(key) = event::read()?
         {
-            state.handle_key(key);
+            app.handle_key(key);
         }
     }
     Ok(())
-}
-
-fn render(frame: &mut ratatui::Frame) {
-    frame.render_widget("hello world", frame.area());
 }
