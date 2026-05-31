@@ -23,7 +23,7 @@ fn run() -> error::Result<()> {
         if event::poll(Duration::from_millis(16))?
             && let Event::Key(key) = event::read()?
         {
-            app.handle_key(key);
+            app.handle_key(key, &mut ui);
         }
     }
     Ok(())
