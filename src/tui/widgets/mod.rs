@@ -12,6 +12,7 @@ use ratatui::{
 mod library;
 mod player_bar;
 mod queue;
+mod title;
 mod tool_tip;
 
 pub struct Section(pub Focus);
@@ -31,7 +32,8 @@ impl Section {
 }
 
 pub fn render(frame: &mut Frame, app: &AppState, ui: &mut UiState) {
-    let [tooltip, main, player] = Layout::vertical([
+    let [title, tooltip, main, player] = Layout::vertical([
+        Constraint::Length(1),
         Constraint::Length(2),
         Constraint::Min(0),
         Constraint::Length(6),
@@ -44,4 +46,5 @@ pub fn render(frame: &mut Frame, app: &AppState, ui: &mut UiState) {
     queue::render(frame, right, app, ui);
     player_bar::render(frame, player, app, ui);
     tool_tip::render(frame, tooltip, app);
+    title::render(frame, title, app);
 }
