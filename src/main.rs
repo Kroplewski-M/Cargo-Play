@@ -1,10 +1,12 @@
 use crossterm::event::{self, Event};
 use std::time::Duration;
 
-use crate::{app::AppState, tui::state::UiState};
+use crate::{app::AppState, input::handle_key, tui::state::UiState};
 mod app;
 mod error;
+mod input;
 mod tui;
+
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
     tui::set_panic_hook();
@@ -23,7 +25,7 @@ fn run() -> error::Result<()> {
         if event::poll(Duration::from_millis(16))?
             && let Event::Key(key) = event::read()?
         {
-            app.handle_key(key, &mut ui);
+            handle_key(key, &mut app, &mut ui);
         }
     }
     Ok(())
