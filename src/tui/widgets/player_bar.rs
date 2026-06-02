@@ -11,6 +11,6 @@ use crate::{
 const SECTION: Section = Section(Focus::PlayerBar);
 
 pub fn render(frame: &mut Frame, area: Rect, _app: &AppState, ui: &mut UiState) {
-    let block = SECTION.block("Player control", ui);
+    let block = SECTION.block("Player Control (3)", ui);
     frame.render_widget(block, area);
 }
