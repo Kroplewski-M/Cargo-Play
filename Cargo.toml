@@ -10,7 +10,10 @@ color-eyre = "0.6.5"
 crossterm = "0.29.0"
 ratatui = "0.30.0"
 thiserror = "2.0.18"
-
+rusqlite = { version = "0.40.0", features = ["bundled"] }
+rusqlite_migration = { version = "2.6.0", features = ["from-directory"] }
+include_dir = "0.7.4"
+dirs = "6.0.0"
 
 [profile.release]
 codegen-units = 1
