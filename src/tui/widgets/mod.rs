@@ -32,7 +32,7 @@ impl Section {
 
 pub fn render(frame: &mut Frame, app: &AppState, ui: &mut UiState) {
     let [tooltip, main, player] = Layout::vertical([
-        Constraint::Length(3),
+        Constraint::Length(5),
         Constraint::Min(0),
         Constraint::Length(6),
     ])
@@ -43,5 +43,5 @@ pub fn render(frame: &mut Frame, app: &AppState, ui: &mut UiState) {
     library::render(frame, left, app, ui);
     queue::render(frame, right, app, ui);
     player_bar::render(frame, player, app, ui);
-    tool_tip::render(frame, tooltip, app);
+    tool_tip::render(frame, tooltip, app, ui);
 }

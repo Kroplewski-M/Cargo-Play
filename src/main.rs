@@ -6,6 +6,7 @@ mod app;
 mod db;
 mod error;
 mod input;
+mod key_bindings;
 mod tui;
 
 fn main() -> color_eyre::Result<()> {
@@ -20,7 +21,7 @@ fn run() -> error::Result<()> {
     let mut terminal = tui::setup()?;
     let mut app = AppState::new();
     let mut ui = UiState::new();
-    let db = open_sql_connection();
+
     while app.running {
         terminal.draw(|f| tui::widgets::render(f, &app, &mut ui))?;
         if event::poll(Duration::from_millis(16))?
@@ -33,7 +34,7 @@ fn run() -> error::Result<()> {
 }
 
 pub fn open_sql_connection() -> error::Result<Database> {
-    let db_path = dirs::home_dir()
+    let db_path = dirs::data_dir()
         .unwrap_or_else(|| std::path::PathBuf::from("."))
         .join(".cargo_play")
         .join(".cargo_play.db");

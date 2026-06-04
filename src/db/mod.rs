@@ -13,7 +13,7 @@ fn migrations() -> Migrations<'static> {
 
 /// A wrapper around a SQLite [`Connection`] with the app schema applied.
 pub struct Database {
-    pub conn: Connection,
+    conn: Connection,
 }
 
 impl Database {
@@ -24,7 +24,7 @@ impl Database {
 
         conn.pragma_update(None, "foreign_keys", true)?;
 
-        migrations().to_latest(&mut conn).unwrap();
+        migrations().to_latest(&mut conn)?;
         Ok(Self { conn })
     }
 }

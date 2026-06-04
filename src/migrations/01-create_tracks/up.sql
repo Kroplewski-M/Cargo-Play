@@ -14,7 +14,7 @@ CREATE TABLE playlists
 
 CREATE TABLE track_playlists
 (
-  track_id INTEGER REFERENCES track(id),
+  track_id INTEGER REFERENCES tracks(id),
   playlist_id INTEGER REFERENCES playlists(id),
   position INTEGER NOT NULL,
   PRIMARY KEY(track_id, playlist_id)

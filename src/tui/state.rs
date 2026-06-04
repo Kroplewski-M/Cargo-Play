@@ -1,6 +1,6 @@
 use ratatui::widgets::ListState;
 
-#[derive(Default, PartialEq)]
+#[derive(Default, PartialEq, Clone)]
 pub enum Focus {
     #[default]
     Library,
