@@ -4,10 +4,17 @@ pub struct AppState {
     pub running: bool,
     pub library: Vec<Track>,
 }
-
+impl Default for AppState {
+    fn default() -> Self {
+        Self {
+            running: true,
+            library: vec![],
+        }
+    }
+}
 impl AppState {
     pub fn new() -> Self {
-        AppState {
+        Self {
             running: true,
             library: vec![],
         }

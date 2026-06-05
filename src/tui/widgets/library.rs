@@ -20,10 +20,9 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
         .library
         .iter()
         .map(|t| {
-            let secs = t.duration as u64;
             Row::new(vec![
                 Cell::from(t.name.as_str()),
-                Cell::from(format!("{}:{:02}", secs / 60, secs % 60)),
+                Cell::from(t.formatted_duration()),
             ])
         })
         .collect();
@@ -39,7 +38,7 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
                 .style(Style::new().bold().underlined())
                 .bottom_margin(1),
         )
-        .highlight_symbol(">>");
+        .row_highlight_style(Style::new().on_green().black());
 
     frame.render_stateful_widget(table, area, &mut ui.library_list);
 }

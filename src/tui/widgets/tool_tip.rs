@@ -24,7 +24,7 @@ pub fn render(frame: &mut Frame, area: Rect, _app: &AppState, ui: &UiState) {
     frame.render_widget(section_tips, down);
 }
 
-pub fn get_bindings(bindings: &[KeyBinding]) -> String {
+fn get_bindings(bindings: &[KeyBinding]) -> String {
     bindings
         .iter()
         .map(|b| format!("{} ({})", b.key, b.description))

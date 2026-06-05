@@ -4,6 +4,8 @@ use crate::tui::state::Focus;
 
 pub enum Action {
     FocusSection(Focus),
+    ScrollUp,
+    ScrollDown,
     AddTrackToLibrary,
     DeleteTrackFromLibrary,
     Quit,
@@ -19,14 +21,14 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
     match focus {
         Focus::Library => &[
             KeyBinding {
-                key: KeyCode::Char('A'),
-                description: "Add track to the library",
-                action: Action::AddTrackToLibrary,
+                key: KeyCode::Char('J'),
+                description: "Scroll Down",
+                action: Action::ScrollDown,
             },
             KeyBinding {
-                key: KeyCode::Char('D'),
-                description: "Remove track from the library",
-                action: Action::DeleteTrackFromLibrary,
+                key: KeyCode::Char('K'),
+                description: "Scroll Up",
+                action: Action::ScrollUp,
             },
         ],
         Focus::Queue => &[],
