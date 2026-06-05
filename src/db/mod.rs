@@ -4,6 +4,8 @@ use include_dir::{Dir, include_dir};
 use rusqlite::Connection;
 use rusqlite_migration::Migrations;
 
+pub mod queries;
+
 static MIGRATIONS_DIR: Dir = include_dir!("$CARGO_MANIFEST_DIR/src/migrations");
 
 /// Loads migrations from the embedded `src/migrations` directory.

@@ -52,7 +52,7 @@ pub fn global_bindings() -> &'static [KeyBinding] {
         },
         KeyBinding {
             key: KeyCode::Char('3'),
-            description: "Focus player",
+            description: "Focus player control",
             action: Action::FocusSection(Focus::PlayerBar),
         },
     ]
