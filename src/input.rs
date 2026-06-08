@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use crossterm::event::{KeyCode, KeyEvent};
 
 use crate::{
@@ -14,13 +12,13 @@ pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
         other => other,
     };
 
-    let map: HashMap<KeyCode, &Action> = global_bindings()
+    let action = global_bindings()
         .iter()
         .chain(bindings(&ui.focus).iter())
-        .map(|b| (b.key, &b.action))
-        .collect();
+        .find(|b| b.key == normalised)
+        .map(|b| &b.action);
 
-    if let Some(action) = map.get(&normalised) {
+    if let Some(action) = action {
         match action {
             Action::Quit => app.running = false,
             Action::FocusSection(focus) => ui.focus = focus.clone(),

@@ -1,13 +1,13 @@
 use crossterm::event::{self, Event};
 use std::time::Duration;
 
-use crate::{app::AppState, db::Database, input::handle_key, tui::state::UiState};
+use crate::{app::AppState, input::handle_key, tui::state::UiState};
 mod app;
-mod db;
 mod error;
 mod input;
 mod key_bindings;
 mod models;
+mod scanner;
 mod tui;
 
 fn main() -> color_eyre::Result<()> {
@@ -20,11 +20,10 @@ fn main() -> color_eyre::Result<()> {
 
 fn run() -> error::Result<()> {
     let mut terminal = tui::setup()?;
-    let database = open_sql_connection()?;
 
     let mut app = AppState::new();
-    app.library = db::queries::get_tracks(&database)?;
     let mut ui = UiState::new();
+    app.library = scanner::scan(&dirs::audio_dir().unwrap_or_default())?;
     while app.running {
         terminal.draw(|f| tui::widgets::render(f, &app, &mut ui))?;
         if event::poll(Duration::from_millis(16))?
@@ -34,13 +33,4 @@ fn run() -> error::Result<()> {
         }
     }
     Ok(())
-}
-
-fn open_sql_connection() -> error::Result<Database> {
-    let db_path = dirs::data_dir()
-        .unwrap_or_else(|| std::path::PathBuf::from("."))
-        .join("cargo_play")
-        .join("cargo_play.db");
-    std::fs::create_dir_all(db_path.parent().unwrap())?;
-    Database::open(&db_path)
 }

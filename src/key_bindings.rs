@@ -6,8 +6,6 @@ pub enum Action {
     FocusSection(Focus),
     ScrollUp,
     ScrollDown,
-    AddTrackToLibrary,
-    DeleteTrackFromLibrary,
     Quit,
 }
 
