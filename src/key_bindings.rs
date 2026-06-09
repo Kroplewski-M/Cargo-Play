@@ -6,6 +6,8 @@ pub enum Action {
     FocusSection(Focus),
     ScrollUp,
     ScrollDown,
+    PlayPause,
+    PlayTrack,
     Quit,
 }
 
@@ -28,9 +30,29 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
                 description: "Scroll Up",
                 action: Action::ScrollUp,
             },
+            KeyBinding {
+                key: KeyCode::Char(' '),
+                description: "Play Track",
+                action: Action::PlayTrack,
+            },
         ],
-        Focus::Queue => &[],
-        Focus::PlayerBar => &[],
+        Focus::Queue => &[
+            KeyBinding {
+                key: KeyCode::Char('J'),
+                description: "Scroll Down",
+                action: Action::ScrollDown,
+            },
+            KeyBinding {
+                key: KeyCode::Char('K'),
+                description: "Scroll Up",
+                action: Action::ScrollUp,
+            },
+        ],
+        Focus::PlayerBar => &[KeyBinding {
+            key: KeyCode::Char(' '),
+            description: "Play/Pause",
+            action: Action::PlayPause,
+        }],
     }
 }
 pub fn global_bindings() -> &'static [KeyBinding] {

@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct Track {
     pub name: String,
     pub duration: f32,

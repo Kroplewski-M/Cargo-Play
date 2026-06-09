@@ -7,6 +7,7 @@ mod error;
 mod input;
 mod key_bindings;
 mod models;
+mod player;
 mod scanner;
 mod tui;
 
