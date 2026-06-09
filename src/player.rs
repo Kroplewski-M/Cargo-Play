@@ -7,7 +7,7 @@ use crate::models::Track;
 pub struct PlayerControl {
     pub current_track: Option<Track>,
     player: Arc<rodio::Player>,
-    _sink: rodio::MixerDeviceSink,
+    _sink: rodio::MixerDeviceSink, //must stay alive; dropping it stops all audio output
 }
 impl PlayerControl {
     pub fn new() -> Self {

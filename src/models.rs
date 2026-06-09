@@ -1,4 +1,4 @@
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct Track {
     pub name: String,
     pub duration: f32,
@@ -23,5 +23,27 @@ impl Track {
             b if b < 1_048_576 => format!("{:.1} KB", b as f64 / 1_024.0),
             b => format!("{:.1} MB", b as f64 / 1_048_576.0),
         }
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn duration_omits_hours_when_zero() {
+        let t = Track {
+            duration: 90.0,
+            ..Default::default()
+        };
+        assert_eq!(t.formatted_duration(), "01:30");
+    }
+
+    #[test]
+    fn duration_includes_hours() {
+        let t = Track {
+            duration: 3661.0,
+            ..Default::default()
+        };
+        assert_eq!(t.formatted_duration(), "01:01:01");
     }
 }

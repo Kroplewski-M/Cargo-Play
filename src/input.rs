@@ -5,7 +5,7 @@ use crate::{
     key_bindings::{Action, bindings, global_bindings},
     tui::state::{Focus, UiState},
 };
-
+///Normalises all input to upper case, all input must be a unique character
 pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
     let normalised = match key.code {
         KeyCode::Char(c) => KeyCode::Char(c.to_ascii_uppercase()),
@@ -26,7 +26,6 @@ pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
             Action::ScrollDown => scroll_down(app, ui),
             Action::PlayPause => app.player_control.play_pause(),
             Action::PlayTrack => play_track(app, ui),
-            _ => {}
         }
     }
 }

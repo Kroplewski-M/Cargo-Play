@@ -11,11 +11,13 @@ use crate::{error, models::Track};
 
 const AUDIO_EXTENSIONS: &[&str] = &["mp3", "flac", "ogg", "wav", "m4a", "opus", "aac"];
 
+///Scans for audio files within a directory
+///Only decends one directory to not go too deep
 pub fn scan(dir: &Path) -> error::Result<Vec<Track>> {
     let mut tracks = Vec::<Track>::new();
 
     for entry in WalkDir::new(dir)
-        .max_depth(2)
+        .max_depth(2) //only go down one directory
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.file_type().is_file())
