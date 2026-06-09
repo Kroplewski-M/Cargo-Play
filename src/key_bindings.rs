@@ -8,6 +8,8 @@ pub enum Action {
     ScrollDown,
     PlayPause,
     PlayTrack,
+    VolumeUp,
+    VolumeDown,
     Quit,
 }
 
@@ -76,6 +78,16 @@ pub fn global_bindings() -> &'static [KeyBinding] {
             key: KeyCode::Char('3'),
             description: "Focus player control",
             action: Action::FocusSection(Focus::PlayerBar),
+        },
+        KeyBinding {
+            key: KeyCode::Up,
+            description: "Volume Up",
+            action: Action::VolumeUp,
+        },
+        KeyBinding {
+            key: KeyCode::Down,
+            description: "Volume Down",
+            action: Action::VolumeDown,
         },
     ]
 }

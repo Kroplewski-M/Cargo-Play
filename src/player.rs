@@ -7,6 +7,7 @@ use crate::models::Track;
 pub struct PlayerControl {
     pub current_track: Option<Track>,
     player: Arc<rodio::Player>,
+    volume: f32,
     _sink: rodio::MixerDeviceSink, //must stay alive; dropping it stops all audio output
 }
 impl PlayerControl {
@@ -17,6 +18,7 @@ impl PlayerControl {
 
         Self {
             current_track: None,
+            volume: 100.0,
             _sink,
             player: Arc::new(player),
         }
@@ -42,5 +44,9 @@ impl PlayerControl {
         } else {
             self.player.pause();
         }
+    }
+    pub fn adjust_volumne(&mut self, delta: f32) {
+        self.volume = (self.volume + delta).clamp(0.0, 100.0);
+        self.player.set_volume(self.volume / 100.0);
     }
 }

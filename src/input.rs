@@ -26,6 +26,8 @@ pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
             Action::ScrollDown => scroll_down(app, ui),
             Action::PlayPause => app.player_control.play_pause(),
             Action::PlayTrack => play_track(app, ui),
+            Action::VolumeUp => app.player_control.adjust_volumne(10.0),
+            Action::VolumeDown => app.player_control.adjust_volumne(-10.0),
         }
     }
 }
