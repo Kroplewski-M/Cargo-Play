@@ -1,9 +1,11 @@
+use std::collections::VecDeque;
+
 use crate::{models::Track, player::PlayerControl};
 
 pub struct AppState {
     pub running: bool,
     pub library: Vec<Track>,
-    pub queue: Vec<Track>,
+    pub queue: VecDeque<Track>,
     pub player_control: PlayerControl,
 }
 impl Default for AppState {
@@ -11,7 +13,7 @@ impl Default for AppState {
         Self {
             running: true,
             library: vec![],
-            queue: vec![],
+            queue: VecDeque::new(),
             player_control: PlayerControl::new(),
         }
     }

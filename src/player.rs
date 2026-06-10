@@ -59,4 +59,8 @@ impl PlayerControl {
     pub fn track_position_secs(&self) -> f64 {
         self.player.get_pos().as_secs_f64()
     }
+    pub fn stop(&mut self) {
+        self.player.clear();
+        self.current_track = None;
+    }
 }

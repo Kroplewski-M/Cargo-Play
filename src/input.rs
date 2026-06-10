@@ -30,6 +30,7 @@ pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
             Action::VolumeDown => app.player_control.adjust_volumne(-0.05),
             Action::AddToQueue => add_track_to_queue(app, ui),
             Action::RemoveFromQueue => remove_from_queue(app, ui),
+            Action::SkipTrack => skip_track(app, ui),
         }
     }
 }
@@ -86,9 +87,16 @@ fn add_track_to_queue(app: &mut AppState, ui: &UiState) {
     if let Some(index) = ui.library_list.selected()
         && let Some(track) = app.library.get(index)
     {
-        app.queue.push(track.clone());
+        app.queue.push_back(track.clone());
     }
 }
 fn remove_from_queue(app: &mut AppState, ui: &mut UiState) {
     todo!()
+}
+fn skip_track(app: &mut AppState, ui: &mut UiState) {
+    if let Some(track) = app.queue.pop_front() {
+        app.player_control.play_track(&track);
+    } else {
+        app.player_control.stop();
+    }
 }

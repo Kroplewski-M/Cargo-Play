@@ -51,7 +51,7 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
         "▶"
     };
     frame.render_widget(
-        Paragraph::new(format!("  ⏮   {}   ⏭  ", play_icon))
+        Paragraph::new(play_icon)
             .alignment(Alignment::Center)
             .style(Style::new().fg(MAIN_COLOR)),
         controls_row,

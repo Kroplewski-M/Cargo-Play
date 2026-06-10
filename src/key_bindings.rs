@@ -12,6 +12,7 @@ pub enum Action {
     VolumeDown,
     AddToQueue,
     RemoveFromQueue,
+    SkipTrack,
     Quit,
 }
 
@@ -57,9 +58,9 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
                 action: Action::ScrollUp,
             },
             KeyBinding {
-                key: KeyCode::Char('J'),
-                description: "Scroll Down",
-                action: Action::ScrollDown,
+                key: KeyCode::Char('D'),
+                description: "Remove From Queue",
+                action: Action::RemoveFromQueue,
             },
         ],
         Focus::PlayerBar => &[],
@@ -101,6 +102,11 @@ pub fn global_bindings() -> &'static [KeyBinding] {
             key: KeyCode::Enter,
             description: "Play/Pause Track",
             action: Action::PlayPause,
+        },
+        KeyBinding {
+            key: KeyCode::Char('S'),
+            description: "Skip Track",
+            action: Action::SkipTrack,
         },
     ]
 }
