@@ -50,11 +50,7 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
                 action: Action::ScrollUp,
             },
         ],
-        Focus::PlayerBar => &[KeyBinding {
-            key: KeyCode::Char(' '),
-            description: "Play/Pause",
-            action: Action::PlayPause,
-        }],
+        Focus::PlayerBar => &[],
     }
 }
 pub fn global_bindings() -> &'static [KeyBinding] {
@@ -88,6 +84,11 @@ pub fn global_bindings() -> &'static [KeyBinding] {
             key: KeyCode::Down,
             description: "Volume Down",
             action: Action::VolumeDown,
+        },
+        KeyBinding {
+            key: KeyCode::Enter,
+            description: "Play/Pause Track",
+            action: Action::PlayPause,
         },
     ]
 }

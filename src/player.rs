@@ -2,7 +2,7 @@ use std::{fs::File, sync::Arc};
 
 use rodio::Decoder;
 
-use crate::models::Track;
+use crate::models::{Track, formated_duration};
 
 pub struct PlayerControl {
     pub current_track: Option<Track>,
@@ -52,5 +52,11 @@ impl PlayerControl {
     }
     pub fn is_paused(&self) -> bool {
         self.player.is_paused()
+    }
+    pub fn track_formatted_position(&self) -> String {
+        formated_duration(self.player.get_pos().as_secs())
+    }
+    pub fn track_position_secs(&self) -> f64 {
+        self.player.get_pos().as_secs_f64()
     }
 }

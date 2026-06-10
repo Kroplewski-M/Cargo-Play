@@ -1,4 +1,5 @@
 use crossterm::event::{self, Event};
+use ratatui::style::Color;
 use std::time::Duration;
 
 use crate::{app::AppState, input::handle_key, tui::state::UiState};
@@ -10,6 +11,8 @@ mod models;
 mod player;
 mod scanner;
 mod tui;
+
+const MAIN_COLOR: Color = Color::Green;
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;

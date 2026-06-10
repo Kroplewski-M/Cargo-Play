@@ -34,7 +34,7 @@ pub fn render(frame: &mut Frame, app: &AppState, ui: &mut UiState) {
     let [tooltip, main, player] = Layout::vertical([
         Constraint::Length(5),
         Constraint::Min(0),
-        Constraint::Length(6),
+        Constraint::Length(7),
     ])
     .areas(frame.area());
 

@@ -7,15 +7,7 @@ pub struct Track {
 }
 impl Track {
     pub fn formatted_duration(&self) -> String {
-        let total = self.duration as u32;
-        let hours = total / 3600;
-        let minutes = (total % 3600) / 60;
-        let seconds = total % 60;
-        if hours > 0 {
-            format!("{:02}:{:02}:{:02}", hours, minutes, seconds)
-        } else {
-            format!("{:02}:{:02}", minutes, seconds)
-        }
+        formated_duration(self.duration as u64)
     }
     pub fn formatted_size(&self) -> String {
         match self.bytes {
@@ -23,6 +15,16 @@ impl Track {
             b if b < 1_048_576 => format!("{:.1} KB", b as f64 / 1_024.0),
             b => format!("{:.1} MB", b as f64 / 1_048_576.0),
         }
+    }
+}
+pub fn formated_duration(seconds: u64) -> String {
+    let hours = seconds / 3600;
+    let minutes = (seconds % 3600) / 60;
+    let seconds = seconds % 60;
+    if hours > 0 {
+        format!("{:02}:{:02}:{:02}", hours, minutes, seconds)
+    } else {
+        format!("{:02}:{:02}", minutes, seconds)
     }
 }
 #[cfg(test)]
