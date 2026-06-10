@@ -10,6 +10,8 @@ pub enum Action {
     PlayTrack,
     VolumeUp,
     VolumeDown,
+    AddToQueue,
+    RemoveFromQueue,
     Quit,
 }
 
@@ -37,6 +39,11 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
                 description: "Play Track",
                 action: Action::PlayTrack,
             },
+            KeyBinding {
+                key: KeyCode::Char('A'),
+                description: "Add Track To Queue",
+                action: Action::AddToQueue,
+            },
         ],
         Focus::Queue => &[
             KeyBinding {
@@ -48,6 +55,11 @@ pub fn bindings(focus: &Focus) -> &'static [KeyBinding] {
                 key: KeyCode::Char('K'),
                 description: "Scroll Up",
                 action: Action::ScrollUp,
+            },
+            KeyBinding {
+                key: KeyCode::Char('J'),
+                description: "Scroll Down",
+                action: Action::ScrollDown,
             },
         ],
         Focus::PlayerBar => &[],
