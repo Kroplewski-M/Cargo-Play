@@ -130,7 +130,7 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
         vol_bar,
     );
     frame.render_widget(
-        Paragraph::new(format!("{:3}%", (vol * 100.0) as u32))
+        Paragraph::new(format!("{}%", (vol * 100.0) as u32))
             .alignment(Alignment::Right)
             .style(Style::new().fg(Color::Gray)),
         vol_pct,
