@@ -9,7 +9,7 @@ use walkdir::WalkDir;
 
 use crate::{error, models::Track};
 
-const AUDIO_EXTENSIONS: &[&str] = &["mp3", "flac", "ogg", "wav", "m4a", "opus", "aac"];
+const AUDIO_EXTENSIONS: &[&str] = &["mp3", "flac", "ogg", "wav", "m4a", "aac", "mp4"];
 
 ///Scans for audio files within a directory
 ///Only decends one directory to not go too deep

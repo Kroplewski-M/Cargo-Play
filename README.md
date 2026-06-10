@@ -11,7 +11,7 @@ A terminal-based music player written in Rust.
 - Browse your library in a navigable table
 - Queue tracks and skip through them
 - Play, pause, and adjust volume
-- Supports MP3, FLAC, OGG, WAV, M4A, OPUS, AAC
+- Supports MP3, FLAC, OGG, WAV, M4A, AAC, MP4
 
 ## Installation
 
