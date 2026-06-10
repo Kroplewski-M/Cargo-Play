@@ -1,6 +1,7 @@
-# cargo_play
+# Cargo Play
 
 A terminal-based music player written in Rust.
+<img width="1918" height="1013" alt="2026-06-10-200341_hyprshot" src="https://github.com/user-attachments/assets/d67fb919-4585-4f01-a1a4-4fdf4df49415" />
 
 ![Rust](https://img.shields.io/badge/rust-2024-orange)
 
