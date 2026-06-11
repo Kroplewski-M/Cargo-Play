@@ -92,7 +92,7 @@ fn add_track_to_queue(app: &mut AppState, ui: &UiState) {
 }
 fn remove_from_queue(app: &mut AppState, ui: &mut UiState) {}
 
-fn skip_track(app: &mut AppState) {
+pub fn skip_track(app: &mut AppState) {
     if let Some(track) = app.queue.pop_front() {
         app.player_control.play_track(&track);
     } else {

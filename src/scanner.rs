@@ -49,7 +49,7 @@ pub fn scan(dir: &Path) -> error::Result<Vec<Track>> {
         name.truncate(20);
         let bytes = std::fs::metadata(path)?.len();
 
-        let duration = tagged.properties().duration().as_secs_f32();
+        let duration = tagged.properties().duration().as_secs_f64();
         tracks.push(Track {
             name,
             duration,

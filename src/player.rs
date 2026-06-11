@@ -63,4 +63,10 @@ impl PlayerControl {
         self.player.clear();
         self.current_track = None;
     }
+    pub fn finished(&mut self) -> bool {
+        match &self.current_track {
+            Some(_) => !self.is_paused() && self.player.empty(),
+            None => false,
+        }
+    }
 }

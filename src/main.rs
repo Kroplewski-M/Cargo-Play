@@ -2,7 +2,11 @@ use crossterm::event::{self, Event};
 use ratatui::style::Color;
 use std::time::Duration;
 
-use crate::{app::AppState, input::handle_key, tui::state::UiState};
+use crate::{
+    app::AppState,
+    input::{handle_key, skip_track},
+    tui::state::UiState,
+};
 mod app;
 mod error;
 mod input;
@@ -34,6 +38,9 @@ fn run() -> error::Result<()> {
             && let Event::Key(key) = event::read()?
         {
             handle_key(key, &mut app, &mut ui);
+        }
+        if app.player_control.finished() {
+            skip_track(&mut app);
         }
     }
     Ok(())

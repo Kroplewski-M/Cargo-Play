@@ -1,7 +1,7 @@
 #[derive(Clone, Default)]
 pub struct Track {
     pub name: String,
-    pub duration: f32,
+    pub duration: f64,
     pub location: String,
     pub bytes: u64,
 }
