@@ -10,7 +10,7 @@ A terminal-based music player written in Rust.
 - Scans your system audio directory for music automatically
 - Browse your library in a navigable table
 - Queue tracks and skip through them
-- Play, pause, and adjust volume
+- Play, pause, loop, and adjust volume
 - Supports MP3, FLAC, OGG, WAV, M4A, AAC, MP4
 
 ## Installation
