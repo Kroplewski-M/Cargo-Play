@@ -30,6 +30,9 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
     .areas(inner);
 
     // Track name
+    let [track_name_area, loop_label_area] =
+        Layout::horizontal([Constraint::Min(0), Constraint::Length(8)]).areas(track_row);
+
     let (track_text, track_style) = match &app.player_control.current_track {
         Some(t) => (
             t.name.as_str(),
@@ -41,8 +44,14 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
         Paragraph::new(track_text)
             .alignment(Alignment::Center)
             .style(track_style),
-        track_row,
+        track_name_area,
     );
+    if app.player_control.looping() {
+        frame.render_widget(
+            Paragraph::new("  Loop  ").style(Style::new().fg(Color::Black).bg(MAIN_COLOR)),
+            loop_label_area,
+        );
+    }
 
     let play_icon = if app.player_control.current_track.is_some() && !app.player_control.is_paused()
     {

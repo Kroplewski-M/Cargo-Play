@@ -31,6 +31,7 @@ pub fn handle_key(key: KeyEvent, app: &mut AppState, ui: &mut UiState) {
             Action::AddToQueue => add_track_to_queue(app, ui),
             Action::RemoveFromQueue => remove_from_queue(app, ui),
             Action::SkipTrack => skip_track(app),
+            Action::LoopTrack => app.player_control.toggle_loop_track(),
         }
     }
 }

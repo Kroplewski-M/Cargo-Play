@@ -39,8 +39,15 @@ fn run() -> error::Result<()> {
         {
             handle_key(key, &mut app, &mut ui);
         }
+
         if app.player_control.finished() {
-            skip_track(&mut app);
+            if app.player_control.looping()
+                && let Some(track) = &app.player_control.current_track
+            {
+                app.player_control.play_track(&track.clone());
+            } else {
+                skip_track(&mut app);
+            }
         }
     }
     Ok(())

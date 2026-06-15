@@ -7,6 +7,8 @@ use crate::models::{Track, formated_duration};
 pub struct PlayerControl {
     pub current_track: Option<Track>,
     player: Arc<rodio::Player>,
+    loading_track: bool,
+    loop_track: bool,
     _sink: rodio::MixerDeviceSink, //must stay alive; dropping it stops all audio output
 }
 impl PlayerControl {
@@ -19,9 +21,12 @@ impl PlayerControl {
             current_track: None,
             _sink,
             player: Arc::new(player),
+            loading_track: false,
+            loop_track: false,
         }
     }
     pub fn play_track(&mut self, track: &Track) {
+        self.loading_track = true;
         let cloned_player = self.player.clone();
         let location = track.location.clone();
         std::thread::spawn(move || {
@@ -65,8 +70,22 @@ impl PlayerControl {
     }
     pub fn finished(&mut self) -> bool {
         match &self.current_track {
-            Some(_) => !self.is_paused() && self.player.empty(),
+            Some(_) => {
+                if self.loading_track {
+                    self.loading_track = !self.player.empty();
+                    return false;
+                }
+                !self.is_paused() && self.player.empty()
+            }
             None => false,
         }
+    }
+    pub fn toggle_loop_track(&mut self) {
+        if self.current_track.is_some() {
+            self.loop_track = !self.loop_track;
+        }
+    }
+    pub fn looping(&self) -> bool {
+        self.loop_track
     }
 }
