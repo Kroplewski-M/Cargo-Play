@@ -30,8 +30,9 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
     .areas(inner);
 
     // Track name
-    let [track_name_area, loop_label_area] =
-        Layout::horizontal([Constraint::Min(0), Constraint::Length(8)]).areas(track_row);
+    let [_left_pad, track_name_area, loop_label_area] =
+        Layout::horizontal([Constraint::Length(8), Constraint::Min(0), Constraint::Length(8)])
+            .areas(track_row);
 
     let (track_text, track_style) = match &app.player_control.current_track {
         Some(t) => (
@@ -55,14 +56,14 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
 
     let play_icon = if app.player_control.current_track.is_some() && !app.player_control.is_paused()
     {
-        "⏸"
+        "Play"
     } else {
-        "▶"
+        "Pause"
     };
     frame.render_widget(
         Paragraph::new(play_icon)
             .alignment(Alignment::Center)
-            .style(Style::new().fg(MAIN_COLOR)),
+            .style(Style::new().fg(MAIN_COLOR).add_modifier(Modifier::BOLD)),
         controls_row,
     );
 
