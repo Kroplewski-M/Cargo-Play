@@ -17,7 +17,7 @@ use crate::{
 const SECTION: Section = Section(Focus::PlayerBar);
 
 pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
-    let block = SECTION.block(" Player ", ui);
+    let block = SECTION.block(" Player(3)", ui);
     let inner = block.inner(area);
 
     let [track_row, controls_row, progress_row, _gap, volume_row] = Layout::vertical([
@@ -60,7 +60,7 @@ pub fn render(frame: &mut Frame, area: Rect, app: &AppState, ui: &mut UiState) {
     // Progress bar
     if let Some(track) = &app.player_control.current_track {
         let ratio = if track.duration > 0.0 {
-            (app.player_control.track_position_secs() / track.duration as f64).clamp(0.0, 1.0)
+            (app.player_control.track_position_secs() / track.duration).clamp(0.0, 1.0)
         } else {
             0.0
         };

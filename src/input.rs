@@ -90,7 +90,11 @@ fn add_track_to_queue(app: &mut AppState, ui: &UiState) {
         app.queue.push_back(track.clone());
     }
 }
-fn remove_from_queue(app: &mut AppState, ui: &mut UiState) {}
+fn remove_from_queue(app: &mut AppState, ui: &mut UiState) {
+    if let Some(index) = ui.queue_list.selected() {
+        app.queue.remove(index);
+    }
+}
 
 pub fn skip_track(app: &mut AppState) {
     if let Some(track) = app.queue.pop_front() {
